@@ -7,6 +7,8 @@ with the container.
 
 ## Folder Structure
 
+The folder structure [docker/nginx](docker/nginx) holds files used in this example:
+
 - [certificates](docker/nginx/certificates): Place your certificates into this folder which is mapped to `/etc/ssl/certs/nginx` in the provided [docker-compose.yml](docker-compose.yml) file.
 - [conf.d](docker/nginx/conf.d): Folder for virtual host configurations. It is mentioned in nginx.conf which is not part of this repo - the default one is used. [example.conf](docker/nginx/conf.d/example.conf) also contains an example proxy configuration. You can have multiple proxy configs inside the same container as long as they don't have overlapping server names. I left my `localhost.mbo.dev` which I used for testing. This way I can verify functionality without any changes. Of course you need to change the domain when using this.
 - [html](docker/nginx/html): Mapped to `/var/www/html` inside the container. Place your files here to use them from your virtual hosts.
