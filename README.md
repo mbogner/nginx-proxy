@@ -3,7 +3,13 @@
 This is a sample SSL enabled reverse proxy. It terminates SSL and allows forwarding to other containers. Of course you can use this setup for non proxy setups as well.
 
 The included [docker-compose.yml](docker-compose.yml) file and provided folder structure make it easier to work
-with the container.
+with the container. In this compose config `nginx` container is proxying requests to <https://localhost.mbo.dev> to `nginx2` which is just a default nginx without extra config.
+
+`localhost.mbo.dev = entry in /etc/hosts for 127.0.0.1`
+
+It displays the default nginx start page when accessed.
+
+Without domain name (direct access to proxy): Requests to port 80 of the proxy (<http://localhost>) display the included [index.html](docker/nginx/html/default/index.html) file under [docker/nginx/html/default](docker/nginx/html/default). Requests to port 443 to the default virtual host aren't answered (<https://localhost>) by the default config because this would require another certificate and this was only tested for local environment with localhost for direct access. If the default server isn't listening for something nginx takes the first virtual host that is capable of serving the request. So access to <https://localhost> could end up on nginx2 with SSL error on your client.
 
 ## Folder Structure
 
